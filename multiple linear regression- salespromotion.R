@@ -11,6 +11,7 @@ promotion= c(200,200,200,200,400,400,400,400, 600,600,600,600,200,200,200,200, 4
 #Create a DF from 3 variables
 omni1 = data.frame(sales,price,promotion)
 head(omni1)
+summary(omni1)
 
 #2nd Method : from CSV file
 #omni2 = read.csv(file.choose())
@@ -19,6 +20,7 @@ head(omni1)
 library(gsheet)
 url = "https://docs.google.com/spreadsheets/d/1h7HU0X_Q4T5h5D1Q36qoK40Tplz94x_HZYHOJJC_edU/edit#gid=1595306231"
 omni3 = as.data.frame(gsheet::gsheet2tbl(url))
+head(omni3)
 
 #Make one of data frames active
 omni = omni1
@@ -26,7 +28,9 @@ omni = omni1
 
 #MLR  Create Multiple Linear Regression
 # we want to see how Sales Qty depend on Price and Promotion Values
-fit2 = lm(formula = sales ~ price + promotion, data=omni)
+fit2 = lm(sales ~ price + promotion, data=omni)
+str(omni)
+nrow(omni)
 
 # summary statistics of model IMP STEP
 summary(fit2)
@@ -49,11 +53,14 @@ summary(fit2)
 #Predict SalesQty for new combination of Values----
 
 #create a dataframe of new sample values
+summary(omni)
 (ndata2 = data.frame(price=c(60,70), promotion=c(300,400)))
 p2sales = predict(fit2, newdata=ndata2, type='response')
+p2sales
 cbind(ndata2, p2sales)
 
 #Assumptions
+plot(fit2)
 plot(fit2,1)  # no pattern, equal variance
 plot(fit2,2)  # Residuals are normally distributed
 plot(fit2,3)  # No hetero-scedascity
