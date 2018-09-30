@@ -49,7 +49,7 @@ plot(pred, xlab="Lags", ylab = "Returns")
 pred$mean
 
 #comparing the data sets
-lines(original, col="red")
+lines(original, col="red")  
 
 new_series= pred$fitted
 plot(Returns, main="Original versus Fitted series", col="blue")
