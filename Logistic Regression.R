@@ -55,6 +55,7 @@ addmargins(prop.table(table(Default$default,Default$student)))
 
 options(digits=10)
 
+#Predict on test data
 fitted.results = predict(logit2, newdata=ndata,type='response')
 fitted.results
 head(fitted.results)
